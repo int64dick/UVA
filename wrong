@@ -7,35 +7,52 @@ public class SymmetricDick
 		Scanner sc = new Scanner(System.in);
 		
 		int n = sc.nextInt();
+		sc.nextLine();   // 清除換行
+		
 		
 		for(int i = 0; i<n; i++)
 		{
 			String[] t = sc.nextLine().split(" ");
 			int N = Integer.parseInt(t[2]);
+			System.out.println(N);
 			int[][] arr = new int[N][N];
+			
+			
 			for(int j =0; j<N; j++)
 			{
+				Scanner ics = new Scanner(sc.nextLine());  //一次讀取整行避免換行問題 ，把鍵盤讀取道的一整行字串丟到新的Scanner幫你分析
 				for(int k =0; k<N; k++)
 				{
-					arr[j][k] = sc.nextInt();
-					symmetric(arr, N, n);
+					arr[j][k] = ics.nextInt();
 				}
 			}
+			
+			boolean flag = isSymmetric(arr, N);  // n???? 是 i+1吧? 都無所謂了 第幾筆資料根本跟判斷是否對稱無關所以我刪除了
+			
+			if(flag)
+				System.out.println("Test #"+""+(i+1)+":  Symmetric.");
+			else
+				System.out.println("Test #"+""+(i+1)+": Non-symmetric.");
 		}
 	}
 	
-	public static void symmetric(int[][] arr, int N, int n)
+	
+	// print沒事請由main來處理 副程式提供的是功能，萬萬不得已才會在副程式用print
+	
+	public static boolean isSymmetric(int[][] arr, int N)
 	{
 		for(int i = 0; i<arr.length; i++)
 		{
 			for(int j=0; j<arr[0].length; j++)
 			{
-				if(arr[i][j] != arr[N-i][N-j])
+				if(arr[i][j] != arr[N-i-1][N-j-1]) // 最大索引值 = length -1 自己注意範圍問題
 				{
-					System.out.println("Test #"+""+n+": Non-symmetric.");
+					
+					return false;
 				}
 			}
 		}
-		System.out.println("Test #"+""+n+":  Symmetric.");
+		
+		return true;
 	}
 }
