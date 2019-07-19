@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class SymmetricDick 
+{
+	public static void main(String[] args)
+	{
+		Scanner sc = new Scanner(System.in);
+		
+		int n = sc.nextInt();
+		
+		for(int i = 0; i<n; i++)
+		{
+			String[] t = sc.nextLine().split(" ");
+			int N = Integer.parseInt(t[2]);
+			int[][] arr = new int[N][N];
+			for(int j =0; j<N; j++)
+			{
+				for(int k =0; k<N; k++)
+				{
+					arr[j][k] = sc.nextInt();
+					symmetric(arr, N, n);
+				}
+			}
+		}
+	}
+	
+	public static void symmetric(int[][] arr, int N, int n)
+	{
+		for(int i = 0; i<arr.length; i++)
+		{
+			for(int j=0; j<arr[0].length; j++)
+			{
+				if(arr[i][j] != arr[N-i][N-j])
+				{
+					System.out.println("Test #"+""+n+": Non-symmetric.");
+				}
+			}
+		}
+		System.out.println("Test #"+""+n+":  Symmetric.");
+	}
+}
